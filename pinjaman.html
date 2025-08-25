@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Pinjaman Lengkap</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex justify-center p-4">
+
+  <div class="w-full max-w-md bg-white rounded-2xl shadow-lg overflow-hidden">
+
+    <!-- Header -->
+    <div class="bg-purple-600 text-white p-5 text-center">
+      <h1 class="text-lg font-semibold">Formulir Pinjaman</h1>
+      <p class="text-xs opacity-80">Lengkapi data dengan benar</p>
+    </div>
+
+    <!-- Tabs -->
+    <div class="flex text-xs font-medium text-purple-600 divide-x divide-purple-200 bg-purple-50">
+      <button class="flex-1 py-2 text-center bg-white border-b-2 border-purple-600">General Info</button>
+      <button class="flex-1 py-2 text-center">Anggunan</button>
+      <button class="flex-1 py-2 text-center">Penanggung Jawab</button>
+      <button class="flex-1 py-2 text-center">Upload File</button>
+    </div>
+
+    <!-- Form -->
+    <form class="p-6 space-y-4 text-sm">
+
+      <!-- No Rekening -->
+      <div>
+        <label class="block text-gray-700 mb-1">No. Rekening</label>
+        <input type="text" placeholder="Cari Nasabah" class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-400 focus:outline-none">
+      </div>
+
+      <!-- ID Nasabah -->
+      <div>
+        <label class="block text-gray-700 mb-1">ID Nasabah</label>
+        <input type="text" class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-400 focus:outline-none">
+      </div>
+
+      <!-- NIK + verifikasi -->
+      <div>
+        <label class="block text-gray-700 mb-1">NIK</label>
+        <div class="flex gap-2">
+          <input type="text" placeholder="Masukkan NIK" class="flex-1 border rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-400 focus:outline-none">
+          <button type="button" class="bg-blue-600 text-white px-3 py-2 rounded-lg text-xs">Verifikasi KTP</button>
+        </div>
+      </div>
+
+      <!-- Nama Nasabah -->
+      <div>
+        <label class="block text-gray-700 mb-1">Nama Nasabah</label>
+        <input type="text" class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-400 focus:outline-none">
+      </div>
+
+      <!-- Alamat Nasabah -->
+      <div>
+        <label class="block text-gray-700 mb-1">Alamat Nasabah</label>
+        <input type="text" class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-400 focus:outline-none">
+      </div>
+
+      <!-- No HP + verifikasi -->
+      <div>
+        <label class="block text-gray-700 mb-1">No. HP</label>
+        <div class="flex gap-2">
+          <input type="text" id="noHpInput"
+                 class="flex-1 border rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-400 focus:outline-none">
+          <button type="button" 
+                  id="verifikasiButton"
+                  onclick="verifikasiNoHp()"
+                  class="bg-blue-600 text-white px-3 py-2 rounded-lg text-xs">
+            Verifikasi No HP
+            <span id="loading" class="hidden ml-2">
+              <svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v16a8 8 0 01-8-8z"></path>
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <script>
+        function verifikasiNoHp() {
+          const noHp = document.getElementById("noHpInput").value;
+          const loading = document.getElementById("loading");
+          const button = document.getElementById("verifikasiButton");
+
+          if(noHp.trim() === ""){
+            alert("Masukkan nomor HP dulu!");
+            return;
+          }
+
+          // Menampilkan animasi loading dan menonaktifkan tombol
+          button.disabled = true;
+          loading.classList.remove("hidden");
+
+          // Simulasi proses verifikasi dengan timeout (misal 2 detik)
+          setTimeout(() => {
+            // Lempar nomor ke halaman status lewat query string
+            window.location.href = "status-hp.html?nohp=" + encodeURIComponent(noHp);
+          }, 2000); // Gantilah dengan waktu verifikasi yang sesuai
+        }
+      </script>
+
+      <!-- Unit Anggota -->
+      <div>
+        <label class="block text-gray-700 mb-1">Unit Anggota</label>
+        <input type="text" placeholder="Tidak Terdapat Unit Anggota" class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-400 focus:outline-none">
+      </div>
+
+      <!-- Kolektor -->
+      <div>
+        <label class="block text-gray-700 mb-1">Kolektor</label>
+        <input type="text" class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-400 focus:outline-none">
+      </div>
+
+      <!-- Tanggal -->
+      <div>
+        <label class="block text-gray-700 mb-1">Tanggal</label>
+        <input type="date" class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-400 focus:outline-none">
+      </div>
+
+      <!-- Produk Pinjaman -->
+      <div>
+        <label class="block text-gray-700 mb-1">Produk Pinjaman</label>
+        <input type="text" class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-400 focus:outline-none">
+      </div>
+
+      <!-- Sektor Pinjaman -->
+      <div>
+        <label class="block text-gray-700 mb-1">Sektor Pinjaman</label>
+        <input type="text" class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-400 focus:outline-none">
+      </div>
+
+      <!-- Tujuan Pinjaman -->
+      <div>
+        <label class="block text-gray-700 mb-1">Tujuan Pinjaman</label>
+        <input type="text" class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-400 focus:outline-none">
+      </div>
+
+      <!-- Bunga Per Tahun -->
+      <div>
+        <label class="block text-gray-700 mb-1">Bunga Per Tahun (%)</label>
+        <input type="number" class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-400 focus:outline-none">
+      </div>
+
+      <!-- Metode Bunga -->
+      <div>
+        <label class="block text-gray-700 mb-1">Metode Bunga Pinjaman</label>
+        <input type="text" class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-400 focus:outline-none">
+      </div>
+
+      <!-- Besar Pinjaman -->
+      <div>
+        <label class="block text-gray-700 mb-1">Besar Pinjaman</label>
+        <input type="number" placeholder="Rp" class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-400 focus:outline-none">
+      </div>
+
+      <!-- Jangka Waktu -->
+      <div>
+        <label class="block text-gray-700 mb-1">Jangka Waktu</label>
+        <input type="text" placeholder="12 Bulan / 24 Bulan" class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-400 focus:outline-none">
+      </div>
+
+      <!-- Buttons -->
+      <div class="pt-4 flex flex-col gap-2">
+                <button type="button" class="w-full bg-gray-200 hover:bg-gray-300 text-gray-700 py-3 rounded-lg font-medium">Simpan</button>
+        <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-lg font-medium">Selesai</button>
+      </div>
+
+    </form>
+  </div>
+
+</body>
+</html>

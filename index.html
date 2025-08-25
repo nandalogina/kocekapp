@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kocek</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Spinner */
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid transparent;
+      border-top-color: #1e40af;
+      border-radius: 50%;
+      animation: spin 1.5s linear infinite;
+    }
+
+    /* Spinner animation */
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Fade-in animation for the overlay */
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    /* Fade-out animation */
+    @keyframes fadeOut {
+      0% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    #loadingOverlay {
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    /* Transition for body */
+    body.fade-out {
+      opacity: 0;
+      transition: opacity 0.5s ease-out;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 flex justify-center items-center min-h-screen">
+
+  <!-- Container -->
+  <div class="w-full max-w-sm bg-white rounded-xl shadow-lg overflow-hidden">
+    
+    <!-- Header -->
+    <div class="bg-blue-900 text-white text-center p-10 relative">
+      <!-- Icon -->
+      <div class="flex justify-center mb-4">
+        <div class="bg-white text-blue-900 p-3 rounded-lg">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-2m4-2a2 2 0 01-2 2h-2V9h2a2 2 0 012 2z" />
+          </svg>
+        </div>
+      </div>
+      <h1 class="text-2xl font-bold">Kocek</h1>
+    </div>
+
+    <!-- Status -->
+    <div class="grid grid-cols-3 bg-gray-50 py-4 text-center text-gray-700">
+      <div>
+        <p class="text-2xl font-bold">4</p>
+        <p class="text-sm">Pengajuan Aktif</p>
+      </div>
+      <div>
+        <p class="text-2xl font-bold">2</p>
+        <p class="text-sm">Butuh Follow Up</p>
+      </div>
+      <div>
+        <p class="text-2xl font-bold">5</p>
+        <p class="text-sm">Disetujui</p>
+      </div>
+    </div>
+
+    <!-- Menu -->
+    <div class="p-6 space-y-4">
+      <a href="#" id="pinjamanButton" class="flex items-center bg-gray-100 p-3 rounded-lg hover:bg-gray-200 transition">
+        <div class="bg-blue-900 text-white p-2 rounded-lg mr-3">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-2.21 0-4 .79-4 2v2c0 1.21 1.79 2 4 2s4-.79 4-2v-2c0-1.21-1.79-2-4-2z" />
+          </svg>
+        </div>
+        <span>Ajukan Pinjaman</span>
+      </a>
+
+      <a href="#" class="flex items-center bg-gray-100 p-3 rounded-lg hover:bg-gray-200 transition">
+        <div class="bg-blue-900 text-white p-2 rounded-lg mr-3">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-4.553a1.5 1.5 0 00-2.122-2.122L12 7.757 6.569 2.325a1.5 1.5 0 00-2.122 2.122L9 10M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H5a2 2 0 00-2 2v5a2 2 0 002 2z" />
+          </svg>
+        </div>
+        <span>Verifikasi Nomor HP</span>
+      </a>
+
+      <a href="#" class="flex items-center bg-gray-100 p-3 rounded-lg hover:bg-gray-200 transition">
+        <div class="bg-blue-900 text-white p-2 rounded-lg mr-3">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <span>Lihat Riwayat</span>
+      </a>
+    </div>
+
+    <!-- Footer -->
+    <div class="bg-gray-50 p-3 text-sm text-center text-red-600 flex items-center justify-center gap-2">
+      <span class="w-2 h-2 bg-red-600 rounded-full"></span>
+      Pengajuan 421 proses verifikasi
+    </div>
+
+  </div>
+
+  <!-- Loading Spinner (Overlay) -->
+  <div id="loadingOverlay" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center hidden">
+    <div class="spinner"></div>
+  </div>
+
+  <script>
+    // Fungsi untuk menampilkan loading dan mengarahkan ke halaman pinjaman.html setelah delay
+    document.getElementById('pinjamanButton').addEventListener('click', function(event) {
+      event.preventDefault(); // Mencegah default action (link menuju halaman)
+      
+      // Menambahkan kelas fade-out pada body untuk transisi
+      document.body.classList.add('fade-out');
+      
+      // Menampilkan animasi loading
+      document.getElementById('loadingOverlay').classList.remove('hidden');
+      
+      // Mengarahkan ke halaman pinjaman.html setelah 2 detik
+      setTimeout(function() {
+        window.location.href = 'pinjaman.html';
+      }, 1000); // 2000 ms = 2 detik (untuk menunggu transisi selesai)
+    });
+  </script>
+</body>
+</html>
