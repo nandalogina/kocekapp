@@ -19,7 +19,9 @@
     <!-- Tabs -->
     <div class="flex text-xs font-medium text-purple-600 divide-x divide-purple-200 bg-purple-50">
       <button class="flex-1 py-2 text-center bg-white border-b-2 border-purple-600">General Info</button>
-      <button class="flex-1 py-2 text-center">Anggunan</button>
+      <a href="agunan.html">
+        <button class="flex-1 py-2 text-center">Agunan</button>
+      </a>
       <button class="flex-1 py-2 text-center">Penanggung Jawab</button>
       <button class="flex-1 py-2 text-center">Upload File</button>
     </div>
@@ -43,8 +45,49 @@
       <div>
         <label class="block text-gray-700 mb-1">NIK</label>
         <div class="flex gap-2">
-          <input type="text" placeholder="Masukkan NIK" class="flex-1 border rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-400 focus:outline-none">
-          <button type="button" class="bg-blue-600 text-white px-3 py-2 rounded-lg text-xs">Verifikasi KTP</button>
+          <input type="text" id="nikInput" placeholder="Masukkan NIK"
+                 class="flex-1 border rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-400 focus:outline-none">
+          <button type="button"
+                  id="btnVerifikasiKtp"
+                  onclick="openModal()"
+                  class="bg-blue-600 text-white px-3 py-2 rounded-lg text-xs">
+            Verifikasi KTP
+          </button>
+        </div>
+      </div>
+
+      <!-- Loader -->
+      <div id="loadingKtp" class="hidden flex items-center gap-2 mt-3 text-sm text-gray-600">
+        <svg class="animate-spin h-5 w-5 text-purple-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v16a8 8 0 01-8-8z"></path>
+        </svg>
+        Sedang memverifikasi KTP...
+      </div>
+
+      <!-- Hasil Verifikasi -->
+      <div id="hasilKtp" class="hidden mt-4 border rounded-lg p-4 bg-gray-50 text-sm">
+        <h3 class="font-semibold text-purple-700 mb-2">Informasi KTP</h3>
+        <p><strong>NIK:</strong> 5204080606930003</p>
+        <p><strong>Nama:</strong> JUNI MARDANI</p>
+        <p><strong>Tempat Lahir:</strong> SUMBAWA</p>
+        <p><strong>Tanggal Lahir:</strong> 06-06-1993</p>
+        <p><strong>Jenis Kelamin:</strong> Laki-laki</p>
+        <p><strong>Agama:</strong> Islam</p>
+        <p><strong>Status Perkawinan:</strong> Kawin</p>
+        <p><strong>Pekerjaan:</strong> Karyawan Swasta</p>
+        <p><strong>Kewarganegaraan:</strong> WNI</p>
+        <p><strong>Alamat:</strong> Dusun Bermi Karang Dalam Timur</p>
+        <p><strong>Provinsi:</strong> Nusa Tenggara Barat</p>
+        <p><strong>Kabupaten/Kota:</strong> Lombok Barat</p>
+        <p><strong>Kecamatan:</strong> Gerung</p>
+        <p><strong>Kel/Desa:</strong> Babussalam</p>
+        <p><strong>RT/RW:</strong> 000 / 000</p>
+
+        <div class="mt-3 flex justify-end">
+          <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-xs hover:bg-blue-700">
+            Koreksi Data KTP
+          </button>
         </div>
       </div>
 
@@ -60,49 +103,40 @@
         <input type="text" class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-400 focus:outline-none">
       </div>
 
-      <!-- No HP + verifikasi -->
-      <div>
-        <label class="block text-gray-700 mb-1">No. HP</label>
-        <div class="flex gap-2">
-          <input type="text" id="noHpInput"
-                 class="flex-1 border rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-400 focus:outline-none">
-          <button type="button" 
-                  id="verifikasiButton"
-                  onclick="verifikasiNoHp()"
-                  class="bg-blue-600 text-white px-3 py-2 rounded-lg text-xs">
-            Verifikasi No HP
-            <span id="loading" class="hidden ml-2">
-              <svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v16a8 8 0 01-8-8z"></path>
-              </svg>
-            </span>
-          </button>
-        </div>
-      </div>
+     <!-- No HP + verifikasi -->
+<div>
+  <label class="block text-gray-700 mb-1">No. HP</label>
+  <div class="flex gap-2">
+    <input type="text" id="noHpInput"
+           class="flex-1 border rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-400 focus:outline-none">
+    <button type="button"
+            id="btnVerifikasiHp"
+            onclick="openModalHp()"
+            class="bg-blue-600 text-white px-3 py-2 rounded-lg text-xs">
+      Verifikasi No HP
+    </button>
+  </div>
+</div>
 
-      <script>
-        function verifikasiNoHp() {
-          const noHp = document.getElementById("noHpInput").value;
-          const loading = document.getElementById("loading");
-          const button = document.getElementById("verifikasiButton");
+<!-- Loader HP -->
+<div id="loadingHp" class="hidden flex items-center gap-2 mt-3 text-sm text-gray-600">
+  <svg class="animate-spin h-5 w-5 text-purple-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v16a8 8 0 01-8-8z"></path>
+  </svg>
+  Sedang memverifikasi nomor HP...
+</div>
 
-          if(noHp.trim() === ""){
-            alert("Masukkan nomor HP dulu!");
-            return;
-          }
+<!-- Hasil Verifikasi HP -->
+<div id="hasilHp" class="hidden mt-4 border rounded-lg p-4 bg-gray-50 text-sm">
+  <h3 class="font-semibold text-purple-700 mb-2">Hasil Verifikasi No HP</h3>
+  <p><strong>Status:</strong> Aktif</p>
+  <p><strong>Provider:</strong> Telkomsel</p>
+  <p><strong>WhatsApp:</strong> Terdaftar</p>
+  <p><strong>Umur Nomor:</strong> 3 Tahun</p>
+  <p><strong>Kategori:</strong> Nomor Utama</p>
+</div>
 
-          // Menampilkan animasi loading dan menonaktifkan tombol
-          button.disabled = true;
-          loading.classList.remove("hidden");
-
-          // Simulasi proses verifikasi dengan timeout (misal 2 detik)
-          setTimeout(() => {
-            // Lempar nomor ke halaman status lewat query string
-            window.location.href = "status-hp.html?nohp=" + encodeURIComponent(noHp);
-          }, 2000); // Gantilah dengan waktu verifikasi yang sesuai
-        }
-      </script>
 
       <!-- Unit Anggota -->
       <div>
@@ -166,12 +200,121 @@
 
       <!-- Buttons -->
       <div class="pt-4 flex flex-col gap-2">
-                <button type="button" class="w-full bg-gray-200 hover:bg-gray-300 text-gray-700 py-3 rounded-lg font-medium">Simpan</button>
+        <button type="button" class="w-full bg-gray-200 hover:bg-gray-300 text-gray-700 py-3 rounded-lg font-medium">Simpan</button>
         <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-lg font-medium">Selesai</button>
       </div>
 
     </form>
   </div>
+
+  <!-- Modal Konfirmasi -->
+  <div id="modalKonfirmasi" class="hidden fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg shadow-lg p-6 max-w-sm w-full">
+      <h2 class="text-lg font-semibold mb-4">Konfirmasi Verifikasi</h2>
+      <p class="text-sm text-gray-600 mb-6">Apakah Anda yakin ingin memverifikasi data KTP ini?</p>
+      <div class="flex justify-end gap-2">
+        <button onclick="closeModal()" class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">Batal</button>
+        <button onclick="verifikasiKtp()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Ya, Verifikasi</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openModal() {
+      document.getElementById("modalKonfirmasi").classList.remove("hidden");
+    }
+
+    function closeModal() {
+      document.getElementById("modalKonfirmasi").classList.add("hidden");
+    }
+
+    function verifikasiKtp() {
+      closeModal();
+      const nik = document.getElementById("nikInput").value.trim();
+      if (!nik) {
+        alert("Masukkan NIK terlebih dahulu!");
+        return;
+      }
+
+      const loading = document.getElementById("loadingKtp");
+      const hasil = document.getElementById("hasilKtp");
+      const button = document.getElementById("btnVerifikasiKtp");
+
+      button.disabled = true;
+      loading.classList.remove("hidden");
+      hasil.classList.add("hidden");
+
+      setTimeout(() => {
+        loading.classList.add("hidden");
+        hasil.classList.remove("hidden");
+        button.disabled = false;
+      }, 3000);
+    }
+
+    function verifikasiNoHp() {
+      const noHp = document.getElementById("noHpInput").value;
+      const loading = document.getElementById("loading");
+      const button = document.getElementById("verifikasiButton");
+
+      if(noHp.trim() === ""){
+        alert("Masukkan nomor HP dulu!");
+        return;
+      }
+
+      button.disabled = true;
+      loading.classList.remove("hidden");
+
+      setTimeout(() => {
+        window.location.href = "status-hp.html?nohp=" + encodeURIComponent(noHp);
+      }, 2000);
+    }
+  </script>
+
+  <!-- Modal Konfirmasi HP -->
+<div id="modalHp" class="hidden fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+  <div class="bg-white rounded-lg shadow-lg p-6 max-w-sm w-full">
+    <h2 class="text-lg font-semibold mb-4">Konfirmasi Verifikasi</h2>
+    <p class="text-sm text-gray-600 mb-6">Apakah Anda yakin ingin memverifikasi nomor HP ini?</p>
+    <div class="flex justify-end gap-2">
+      <button onclick="closeModalHp()" class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">Batal</button>
+      <button onclick="verifikasiHp()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Ya, Verifikasi</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Modal HP
+  function openModalHp() {
+    document.getElementById("modalHp").classList.remove("hidden");
+  }
+  function closeModalHp() {
+    document.getElementById("modalHp").classList.add("hidden");
+  }
+
+  // Verifikasi HP
+  function verifikasiHp() {
+    closeModalHp();
+    const noHp = document.getElementById("noHpInput").value.trim();
+    if (!noHp) {
+      alert("Masukkan nomor HP terlebih dahulu!");
+      return;
+    }
+
+    const loading = document.getElementById("loadingHp");
+    const hasil = document.getElementById("hasilHp");
+    const button = document.getElementById("btnVerifikasiHp");
+
+    button.disabled = true;
+    loading.classList.remove("hidden");
+    hasil.classList.add("hidden");
+
+    setTimeout(() => {
+      loading.classList.add("hidden");
+      hasil.classList.remove("hidden");
+      button.disabled = false;
+    }, 2500);
+  }
+</script>
 
 </body>
 </html>
