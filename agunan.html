@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Input Agunan - Kocek Mobile</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex justify-center p-4">
+
+  <div class="w-full max-w-md bg-white rounded-2xl shadow-lg overflow-hidden">
+
+    <!-- Header -->
+    <div class="bg-purple-600 text-white p-5 text-center">
+      <h1 class="text-lg font-semibold">Formulir Pinjaman</h1>
+      <p class="text-xs opacity-80">Lengkapi data dengan benar</p>
+    </div>
+
+    <!-- Tabs -->
+    <div class="flex text-xs font-medium text-purple-600 divide-x divide-purple-200 bg-purple-50">
+      <a href="pinjaman.html" class="flex-1 py-2 text-center">General Info</a>
+      <button class="flex-1 py-2 text-center bg-white border-b-2 border-purple-600">Agunan</button>
+      <a href="penanggungjawab.html" class="flex-1 py-2 text-center">Penanggung Jawab</a>
+      <a href="upload.html" class="flex-1 py-2 text-center">Upload File</a>
+    </div>
+
+    <!-- Form Agunan -->
+    <form class="p-6 space-y-4 text-sm">
+
+      <!-- Jenis Agunan -->
+      <div>
+        <label class="block text-gray-700 mb-1">Jenis Agunan</label>
+        <select class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-400 focus:outline-none">
+          <option value="">-- Pilih Jenis --</option>
+          <option value="sertifikat">Sertifikat Tanah / Rumah</option>
+          <option value="bpkb">BPKB Kendaraan</option>
+          <option value="emas">Emas / Logam Mulia</option>
+          <option value="lainnya">Lainnya</option>
+        </select>
+      </div>
+
+      <!-- Estimasi Nilai -->
+      <div>
+        <label class="block text-gray-700 mb-1">Estimasi Nilai Agunan (Rp)</label>
+        <input type="number" placeholder="contoh: 50000000"
+               class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-400 focus:outline-none">
+      </div>
+
+      <!-- Lokasi -->
+      <div>
+        <label class="block text-gray-700 mb-1">Lokasi / Alamat</label>
+        <textarea rows="3" placeholder="Tulis alamat lengkap agunan..."
+                  class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-400 focus:outline-none"></textarea>
+      </div>
+
+      <!-- Upload Dokumen -->
+      <div>
+        <label class="block text-gray-700 mb-1">Upload Dokumen</label>
+        <input type="file" accept=".jpg,.png,.pdf"
+               class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-400 focus:outline-none">
+      </div>
+
+      <!-- Button -->
+      <div class="pt-4 flex flex-col gap-2">
+        <button type="button" class="w-full bg-gray-200 hover:bg-gray-300 text-gray-700 py-3 rounded-lg font-medium">Simpan</button>
+        <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-lg font-medium">Selesai</button>
+      </div>
+
+      <p class="text-xs text-center text-gray-500 mt-2">
+        Pastikan data agunan yang dimasukkan benar untuk mempercepat proses verifikasi.
+      </p>
+
+    </form>
+  </div>
+
+</body>
+</html>
